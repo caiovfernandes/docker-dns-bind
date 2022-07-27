@@ -7,7 +7,11 @@ export HOST2_IP=172.20.0.5
 export DNS_IMAGE_NAME=lab01_dns_server
 export HOST_IMAGE_NAME=lab01_dns_host
 
+all: all_dns_server all_hosts host1_shell
+
 all_dns_server: create_network build_dns_servers run_dns_servers
+
+all_hosts: build_hosts run_hosts
 
 create_network:
 	docker network create --subnet=${IP_RANGE}/16 ${NETWORK_NAME}
@@ -43,3 +47,6 @@ clean:
 
 host1_shell:
 	docker exec -it host1 /bin/bash
+
+stop:
+	docker stop dns-server1 dns-server2 host1 host2

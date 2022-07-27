@@ -1,4 +1,19 @@
-# Requirements
+# Project Requirements
+- docker
+
+
+# Quick Test
+1. Run all with make:
+```shell
+make
+```
+
+2. Inside of the host1 container (already in after `make`):
+```shell
+ping host1.caio-foundation.com
+# OR
+ping host2.caio-foundation.com
+```
 
 ## Environments variables
 
@@ -15,7 +30,7 @@ export HOST_IMAGE_NAME=lab01_dns_host
 
 ## Docker network
 
-1. Criando Docker network:
+1. Creating a Docker network:
 ```bash
 docker network create --subnet=${IP_RANGE}/16 ${NETWORK_NAME}
 ```
