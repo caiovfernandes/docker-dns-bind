@@ -1,0 +1,4 @@
+zone "caio-foundation.com" {
+    type master;
+    file "/etc/bind/zones/db.caio-foundation.com";
+};
