@@ -1,9 +1,9 @@
-export IP_RANGE=172.20.0.0
+export IP_RANGE=192.168.10.0
 export NETWORK_NAME=caio-net
-export DNS_SERVER1_IP=172.20.0.2
-export DNS_SERVER2_IP=172.20.0.3
-export HOST1_IP=172.20.0.4
-export HOST2_IP=172.20.0.5
+export DNS_SERVER1_IP=192.168.10.2
+export DNS_SERVER2_IP=192.168.10.3
+export HOST1_IP=192.168.10.4
+export HOST2_IP=192.168.10.5
 export DNS_IMAGE_NAME=lab01_dns_server
 export HOST_IMAGE_NAME=lab01_dns_host
 
@@ -40,13 +40,13 @@ run_hosts:
 	docker run -d --rm --name=host1 --net=${NETWORK_NAME} --ip=${HOST1_IP} --dns=${DNS_SERVER1_IP} --dns=${DNS_SERVER2_IP}  ${HOST_IMAGE_NAME}  /bin/bash -c "while :; do sleep 10; done"
 	docker run -d --rm --name=host2 --net=${NETWORK_NAME} --ip=${HOST2_IP} --dns=${DNS_SERVER1_IP} --dns=${DNS_SERVER2_IP}  ${HOST_IMAGE_NAME}  /bin/bash -c "while :; do sleep 10; done"
 
-clean:
-	docker network rm ${NETWORK_NAME}
-	docker rm ${DNS_IMAGE_NAME}
-	docker rm ${HOST_IMAGE_NAME}
-
 host1_shell:
 	docker exec -it host1 /bin/bash
 
 stop:
 	docker stop dns-server1 dns-server2 host1 host2
+
+clean:
+	docker network rm ${NETWORK_NAME}
+	docker rm ${DNS_IMAGE_NAME}
+	docker rm ${HOST_IMAGE_NAME}
